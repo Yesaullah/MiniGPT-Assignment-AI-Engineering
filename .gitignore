@@ -18,3 +18,8 @@ outputs/*.zip
 # handout and local planning files
 A1_AIE.pdf
 MiniGPT_Assignment_Blueprint.html
+# local tooling; the redesigned figures are committed as images only
+.claude/
+skills-lock.json
+experiments/figures_redesigned.py
+outputs/figures_redesigned/*.export.json
