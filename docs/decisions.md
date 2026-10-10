@@ -2423,3 +2423,22 @@ rough estimate of seed-to-seed variation, not a precise one, and the report says
 **Unchanged:** LR 1e-3 and dropout 0.1 shared by all runs; the 5,000-step budget; the
 leakage demonstration stays single-seed and illustrative (D16b); the shipped model is still the
 baseline seed-0 `best.pt` (D25 simplification of D17).
+
+### D27. Post-hoc stride-32 re-scoring of the ablation checkpoints
+
+**Status:** Accepted · 2026-10-10 · Adds a reporting step; changes no selection.
+
+**Why:** the ablations were selected and reported under D25's non-overlapping validation windows.
+Under that protocol a model with a longer context also gives each scored character more context on
+average, so the context ablation (64: 2.029, 128: 1.999, 256: 1.983 BPC) mixes two effects: what the
+longer context lets the model learn, and how much context the evaluation hands it.
+
+**Decision:** `python -m experiments.stride_eval` re-scores every ablation run's `best.pt` on the
+validation split with D3b's sliding windows (stride 32; every target scored once; after the first
+window each scored character sees at least T − 31 characters). It is reported **next to** the
+non-overlapping numbers as a separately labelled protocol, with the same mean ± sample std and
+paired-difference format (D26). Checkpoint selection, the shipped model and the test split are
+unchanged; the test split is not used.
+
+**Not done:** retraining or reselecting under the strided protocol, and D24b's common BPE start
+offset (BPE stays cut, D25).

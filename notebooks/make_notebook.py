@@ -109,6 +109,7 @@ code("""
 CKPT = "outputs/runs/baseline/best.pt" if RUN_TRAINING else "checkpoints/model.pt"
 if RUN_TRAINING:
     !python -m experiments.evaluate --checkpoint {CKPT} --test
+    !python -m experiments.stride_eval   # re-score every ablation checkpoint, stride 32 (D27)
     !python -m experiments.make_figures
     !mkdir -p {DRIVE_DIR} && cp -r outputs/evidence outputs/figures {DRIVE_DIR}/
 !python -m experiments.attention_visualization --checkpoint {CKPT}

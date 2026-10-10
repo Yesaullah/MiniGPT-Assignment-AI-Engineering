@@ -87,6 +87,48 @@ def evaluate_split(model: GPT, data: torch.Tensor, context_length: int, device: 
     return total / count
 
 
+def strided_windows(n_tokens: int, context_length: int, stride: int) -> list[tuple[int, int]]:
+    """Sliding windows as (start, n_new): inputs start .. start+T-1, scoring only the last n_new
+    targets, which no earlier window scored. Every target 1 .. n_tokens-1 is scored exactly once;
+    after the first window, each scored target sees T - stride + 1 .. T tokens of context."""
+    last = n_tokens - 1  # index of the final target
+    windows, scored = [], 0  # scored: highest target index scored so far
+    end = min(context_length, last)
+    while True:
+        start = max(0, end - context_length)
+        windows.append((start, end - scored))
+        scored = end
+        if end == last:
+            return windows
+        end = min(end + stride, last)
+
+
+@torch.no_grad()
+def evaluate_split_strided(model: GPT, data: torch.Tensor, context_length: int, device: str,
+                           stride: int = 32, batch_size: int = 64) -> float:
+    """Mean next-token loss (nats) with overlapping windows advancing by `stride` (D3b): unlike
+    non-overlapping windows, every scored target after the first window has at least
+    T - stride + 1 tokens of context, so the score depends far less on where windows start."""
+    was_training = model.training
+    model.eval()
+    windows = strided_windows(len(data), context_length, stride)
+    total, count = 0.0, 0
+    for i in range(0, len(windows), batch_size):
+        chunk = windows[i : i + batch_size]
+        length = min(context_length, len(data) - 1)
+        x = torch.stack([data[s : s + length] for s, _ in chunk]).to(device)
+        y = torch.stack([data[s + 1 : s + 1 + length] for s, _ in chunk]).to(device)
+        logits, _ = model(x)
+        pos = torch.arange(length, device=device)
+        n_new = torch.tensor([n for _, n in chunk], device=device)
+        score = pos[None, :] >= (length - n_new)[:, None]  # the last n_new positions of each window
+        total += torch.nn.functional.cross_entropy(logits[score].float(), y[score],
+                                                   reduction="sum").item()
+        count += int(score.sum())
+    model.train(was_training)
+    return total / count
+
+
 def train_subset(train_data: torch.Tensor, size: int, pieces: int = 8) -> torch.Tensor:
     """Evenly spaced excerpts of the training split, same total size as validation."""
     piece = size // pieces
