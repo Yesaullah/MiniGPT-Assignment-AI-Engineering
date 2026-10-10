@@ -146,25 +146,37 @@ def fig6_loss_curve(run: str = "baseline") -> None:
 
 
 def fig9_ablations() -> None:
-    from experiments.ablation import collect
+    from experiments.ablation import aggregate, collect
 
-    rows = collect()
-    if not rows:
+    agg = aggregate(collect())
+    if not agg:
         print("no ablation summaries found; skipping figure 9")
         return
     groups = {"depth": ["depth_2", "baseline", "depth_6"], "heads": ["heads_2", "baseline", "heads_8"],
               "context": ["context_64", "baseline", "context_256"]}
-    by = {r["run"]: r for r in rows}
-    fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+    by = {a["run"]: a for a in agg}
+    short = {"baseline": "baseline", "depth_2": "2 layers", "depth_6": "6 layers", "heads_2": "2 heads",
+             "heads_8": "8 heads", "context_64": "context 64", "context_256": "context 256"}
+    fig, axes = plt.subplots(1, 3, figsize=(14, 4.4), constrained_layout=True)
+    lows = [v for a in agg for v in a["bpc_per_seed"]]
+    ylim = (min(lows) - 0.03, max(lows) + 0.02)  # shared axis, so the three panels compare directly
     for ax, (name, runs) in zip(axes, groups.items()):
-        present = [r for r in runs if r in by]
-        vals = [by[r]["best_val_bpc"] for r in present]
-        labels = [by[r]["label"] for r in present]
-        bars = ax.bar(labels, vals, color=["#9bb", "#7a2e2e", "#9bb"][: len(present)])
-        ax.bar_label(bars, fmt="%.3f")
-        ax.set_ylim(min(vals) * 0.97 if vals else 0, max(vals) * 1.02 if vals else 1)
+        present = [by[r] for r in runs if r in by]
+        xs = list(range(len(present)))
+        means = [a["bpc_mean"] for a in present]
+        errs = [a["bpc_std"] or 0.0 for a in present]
+        colors = ["#7a2e2e" if a["run"] == "baseline" else "#9bb" for a in present]
+        ax.bar(xs, means, yerr=errs, capsize=4, color=colors, width=0.6)
+        for x, a in zip(xs, present):  # each seed as a dot: the spread is visible, not only the mean
+            ax.plot([x] * len(a["bpc_per_seed"]), a["bpc_per_seed"], "k.", ms=5)
+            ax.text(x, ylim[0] + 0.004, f"{a['bpc_mean']:.3f}", ha="center", va="bottom", fontsize=9,
+                    color="white" if a["run"] == "baseline" else "black")
+        ax.set_xticks(xs, [short[a["run"]] for a in present])
+        ax.set_ylim(*ylim)
         ax.set_title(f"{name} ablation")
         ax.set_ylabel("best validation BPC (lower is better)")
+    fig.suptitle("Ablations: bars = mean ± sample std over seeds 0-2, dots = individual seeds, "
+                 "number = mean", fontsize=10)
     save_fig(fig, "fig9_ablations.png")
 
 

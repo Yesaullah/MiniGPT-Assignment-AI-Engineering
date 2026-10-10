@@ -2399,3 +2399,27 @@ Render Free, the Colab notebook, the figures, README, Medium article, demo video
 rule, n-gram baselines, the blind human rating, the latency pilot, SSE streaming,
 lock files beyond `requirements.txt`, the full MLM training run, and the optional extras.
 The report presents these as limitations or future work and never implies they were done.
+
+### D26. Ablation seed tier: 3 seeds
+
+**Status:** Accepted · 2026-10-10 · **Amends D25** (which kept the ablations at seed 0 only).
+Decided **before any ablation result existed**, as D16a requires.
+
+**Evidence:** the Colab pilot (300 baseline steps on a Tesla T4) measured **64.6 ms per
+training step** and **1.3 s per evaluation**, with a peak of 794 MB. One 5,000-step baseline run
+is therefore about 6 minutes, and the seven configurations at one seed about 40–50 minutes. D25's
+seed cut was made for an unknown compute budget; the measured budget no longer requires it.
+
+**Decision:** D16a's **preferred tier**, applied uniformly: every one of the 7 configurations
+(baseline, depth 2/6, heads 2/8, context 64/256) is trained with **seeds 0, 1 and 2**, 21 runs
+in total (14 more than D25). The seed sets the initialization, the batch order and dropout (D12f).
+Runs are ordered seed by seed (all configurations at seed 0, then seed 1, then seed 2), so if time
+ran out, every finished seed would still be a complete set.
+
+**Reporting (D16a):** each seed's result; mean ± **sample** standard deviation per configuration;
+and each variant's **paired difference from the baseline at the same seed**. Three seeds give a
+rough estimate of seed-to-seed variation, not a precise one, and the report says so.
+
+**Unchanged:** LR 1e-3 and dropout 0.1 shared by all runs; the 5,000-step budget; the
+leakage demonstration stays single-seed and illustrative (D16b); the shipped model is still the
+baseline seed-0 `best.pt` (D25 simplification of D17).

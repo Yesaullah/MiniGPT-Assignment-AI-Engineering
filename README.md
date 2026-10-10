@@ -45,7 +45,7 @@ training split, no special tokens. Characters outside the vocabulary are rejecte
 ```bash
 python -m src.train --config configs/tiny_gpt.yaml                    # baseline, ~X min on a T4
 python -m src.train --config configs/tiny_gpt.yaml --resume           # continue from last.pt
-python -m experiments.ablation --run                                  # depth, heads, context ablations
+python -m experiments.ablation --run                                  # depth, heads, context ablations, seeds 0-2
 python -m src.config --config configs/tiny_gpt.yaml --set model.n_layers=6   # print a resolved config
 ```
 
@@ -94,13 +94,14 @@ downloads the model listed in `checkpoints/RELEASE.json` and verifies its SHA-25
 
 ## Known limitations
 
-- Single training seed per configuration: the ablation differences are exploratory, with no
-  seed-variance estimate. LR (1e-3) and dropout (0.1) were fixed, not tuned per architecture.
+- Three training seeds per ablation configuration (D26): enough for a rough estimate of
+  seed-to-seed variation, not a precise one. LR (1e-3) and dropout (0.1) were fixed, not tuned
+  per architecture.
 - Validation uses non-overlapping windows, so early positions in each window have little context.
 - Character-level, 1 MB of text, 3M parameters: output is Shakespeare-like in form, not meaning.
 - Free hosting is slow (0.1 CPU) and sleeps when idle.
 - Planned but not done before the deadline (see `docs/decisions.md`, D25): LR × dropout grid,
-  multiple seeds, BPE tokenizer comparison, n-gram baselines, blind human rating, streaming API.
+  BPE tokenizer comparison, n-gram baselines, blind human rating, streaming API.
 
 ## AI assistance and contributions
 

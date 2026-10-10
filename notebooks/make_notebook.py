@@ -88,7 +88,11 @@ code("""
 if RUN_TRAINING:
     !python -m src.train --config configs/tiny_gpt.yaml --resume
 """)
-md("## 5. Required ablations: depth 2/6, heads 2/8, context 64/256 (one change at a time)")
+md("""
+## 5. Required ablations: depth 2/6, heads 2/8, context 64/256 (one change at a time)
+Seeds 0, 1 and 2 for every configuration (D26): 21 runs, about 2 hours on a T4. The baseline
+run from section 4 is reused as seed 0. Keep the tab open; after a disconnect, run from the top.
+""")
 code("""
 if RUN_TRAINING:
     !python -m experiments.ablation --run
