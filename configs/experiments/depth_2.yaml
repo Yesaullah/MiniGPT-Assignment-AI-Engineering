@@ -1,0 +1,4 @@
+model:
+  n_layers: 2
+train:
+  out_dir: outputs/runs/depth_2

@@ -1,0 +1,10 @@
+# Lower bounds keep Colab's preinstalled CUDA PyTorch; versions are recorded in each run manifest.
+torch>=2.2
+numpy>=1.26
+pyyaml>=6.0
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2.6
+httpx>=0.27
+matplotlib>=3.8
+pytest>=8.0

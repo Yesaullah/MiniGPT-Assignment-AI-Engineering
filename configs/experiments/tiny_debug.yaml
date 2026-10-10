@@ -1,0 +1,14 @@
+# Fast CPU smoke run
+model:
+  context_length: 32
+  d_model: 64
+  n_heads: 2
+  n_layers: 2
+  ffn_dim: null
+train:
+  batch_size: 16
+  max_steps: 60
+  warmup_steps: 10
+  eval_interval: 30
+  sample_tokens: 40
+  out_dir: outputs/runs/tiny_debug

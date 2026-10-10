@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.env
+# data: corpus is downloaded and checksum-verified; keep docs
+data/*
+!data/README.md
+!data/manifest.json
+# checkpoints: published as a GitHub Release asset
+checkpoints/*
+!checkpoints/.gitkeep
+!checkpoints/RELEASE.json
+# run outputs (large); final figures and evidence are committed
+outputs/runs/
+outputs/*.zip
+# handout and local planning files
+A1_AIE.pdf
+MiniGPT_Assignment_Blueprint.html

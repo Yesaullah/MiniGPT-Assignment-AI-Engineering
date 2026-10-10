@@ -1,0 +1,4 @@
+model:
+  n_heads: 2
+train:
+  out_dir: outputs/runs/heads_2

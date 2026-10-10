@@ -1,0 +1,6 @@
+# Same targets per update (8,192): 128 x 64
+model:
+  context_length: 64
+train:
+  batch_size: 128
+  out_dir: outputs/runs/context_64

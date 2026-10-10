@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MiniGPT Shakespeare</title>
+<style>
+  :root { --bg: #fbfaf7; --fg: #1d1d1f; --muted: #6b6b70; --accent: #7a2e2e; --card: #fff; --line: #e4e1da; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #161618; --fg: #ececee; --muted: #a0a0a8; --accent: #e08a7a; --card: #1f1f22; --line: #333338; } }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px; }
+  h1 { font-family: Georgia, serif; margin: 0 0 4px; }
+  p.sub { color: var(--muted); margin: 0 0 20px; }
+  textarea, input { width: 100%; box-sizing: border-box; font: inherit; padding: 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--fg); }
+  .row { display: flex; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
+  .row label { flex: 1; min-width: 140px; font-size: 14px; color: var(--muted); }
+  button { background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: 10px 18px; font: inherit; cursor: pointer; }
+  button:disabled { opacity: .6; cursor: wait; }
+  pre { white-space: pre-wrap; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px; min-height: 120px; font-family: Georgia, serif; }
+  .meta { color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>MiniGPT</h1>
+  <p class="sub">A 3.2M-parameter character-level GPT trained from scratch on Tiny Shakespeare.</p>
+  <label for="prompt" class="meta">Prompt</label>
+  <textarea id="prompt" rows="3">ROMEO:
+</textarea>
+  <div class="row">
+    <label>Max new tokens <input id="max" type="number" value="200" min="1" max="500"></label>
+    <label>Temperature <input id="temp" type="number" value="0.8" min="0" max="2" step="0.1"></label>
+    <label>Seed <input id="seed" type="number" value="0" min="0"></label>
+  </div>
+  <button id="go">Generate</button>
+  <pre id="out"></pre>
+  <div id="meta" class="meta"></div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+$("go").onclick = async () => {
+  $("go").disabled = true; $("out").textContent = "Generating..."; $("meta").textContent = "";
+  try {
+    const res = await fetch("/generate", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: $("prompt").value, max_new_tokens: +$("max").value,
+                             temperature: +$("temp").value, seed: +$("seed").value }) });
+    const data = await res.json();
+    if (!res.ok) { $("out").textContent = "Error: " + JSON.stringify(data.detail); return; }
+    $("out").textContent = data.prompt + data.generated;
+    $("meta").textContent = `${data.model_parameters.toLocaleString()} params · context ${data.context_length} · ` +
+      `temperature ${data.temperature} · ${data.seconds}s (${data.chars_per_second} chars/s)`;
+  } catch (e) { $("out").textContent = "Request failed: " + e; }
+  finally { $("go").disabled = false; }
+};
+</script>
+</body>
+</html>

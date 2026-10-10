@@ -1,0 +1,7 @@
+{
+  "url": "https://raw.githubusercontent.com/karpathy/char-rnn/370cbcd448eb7daf32f21a6be560b70e0b33c4e3/data/tinyshakespeare/input.txt",
+  "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+  "bytes": 1115394,
+  "split": {"train": [0, 1003854], "validation": [1003854, 1059624], "test": [1059624, 1115394]},
+  "vocabulary": "65 characters, all present in the training split"
+}

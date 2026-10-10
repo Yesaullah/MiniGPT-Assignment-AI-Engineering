@@ -1,0 +1,5 @@
+*
+!src
+!configs
+!checkpoints/RELEASE.json
+**/__pycache__

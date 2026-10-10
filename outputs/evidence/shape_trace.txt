@@ -1,0 +1,9 @@
+MultiHeadAttention(d_model=256, n_heads=4, d_head=64), batch B=2, T=128
+
+input x                          (2, 128, 256)
+Q = x W_Q                        (2, 128, 256)
+Q split into heads               (2, 4, 128, 64)
+attention weights per head       (2, 4, 128, 128)
+per-head output                  (2, 4, 128, 64)
+heads concatenated               (2, 128, 256)
+output projection W_O            (2, 128, 256)
