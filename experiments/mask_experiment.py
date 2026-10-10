@@ -41,7 +41,7 @@ def run(steps: int, configs: list[str]) -> dict:
     leak_model, _, _, _ = load_checkpoint(results["mask_leak"], device)
     T = cfg.model.context_length
     out = {
-        "steps": steps,
+        "steps": steps, "params": causal_model.num_params(),
         "causal_model_val_loss": evaluate_split(causal_model, val_data, T, device),
         "leak_model_val_loss_no_mask": evaluate_split(leak_model, val_data, T, device),
         "leak_model_val_loss_with_causal_mask": evaluate_split(leak_model, val_data, T, device,
@@ -56,7 +56,7 @@ def run(steps: int, configs: list[str]) -> dict:
 
 def report(out: dict) -> None:
     text = "\n".join([
-        f"Both models: baseline architecture, {out['steps']} steps, identical schedule and seed.",
+        f"Both models: same architecture ({out['params']:,} parameters), {out['steps']} steps, identical schedule, data and seed; only the mask differs.",
         f"causal model, validation loss:                     {out['causal_model_val_loss']:.4f}",
         f"leak model (no mask), validation loss without mask: {out['leak_model_val_loss_no_mask']:.4f}",
         f"leak model, validation loss WITH causal mask:       "
