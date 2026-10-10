@@ -54,9 +54,30 @@ def git_commit() -> dict:
         return {"commit": None, "dirty": None}
 
 
+def rng_state(batch_gen: torch.Generator) -> dict:
+    """Every random stream training uses: CPU (and CUDA) default generators and the batch sampler."""
+    state = {"cpu": torch.get_rng_state(), "batch": batch_gen.get_state()}
+    if torch.cuda.is_available():
+        state["cuda"] = torch.cuda.get_rng_state_all()  # dropout on the GPU draws from these
+    return state
+
+
+def restore_rng_state(state: dict, batch_gen: torch.Generator) -> None:
+    """The saved states must be CPU tensors: load checkpoints with map_location='cpu'."""
+    torch.set_rng_state(state["cpu"])
+    batch_gen.set_state(state["batch"])
+    if "cuda" in state and torch.cuda.is_available():
+        torch.cuda.set_rng_state_all(state["cuda"])
+
+
 def save_checkpoint(path: str, model: GPT, cfg: Config, tokenizer: CharTokenizer,
-                    extra: dict | None = None, optimizer: torch.optim.Optimizer | None = None) -> None:
-    """Only tensors and plain Python types, so it loads with weights_only=True."""
+                    extra: dict | None = None, optimizer: torch.optim.Optimizer | None = None,
+                    rng: dict | None = None) -> None:
+    """Only tensors and plain Python types, so it loads with weights_only=True.
+
+    Written to a temporary file and then renamed, so an interrupted save never
+    replaces the previous checkpoint with a partial file.
+    """
     state = {
         "schema_version": SCHEMA_VERSION,
         "model": {k: v.detach().cpu() for k, v in model.state_dict().items()},
@@ -66,6 +87,8 @@ def save_checkpoint(path: str, model: GPT, cfg: Config, tokenizer: CharTokenizer
     }
     if optimizer is not None:
         state["optimizer"] = optimizer.state_dict()
+    if rng is not None:
+        state["rng"] = rng
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     tmp = path + ".tmp"
     torch.save(state, tmp)

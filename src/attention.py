@@ -47,6 +47,7 @@ class MultiHeadAttention(nn.Module):
         self.w_o = nn.Linear(d_model, d_model)
         self.attn_dropout = nn.Dropout(dropout)
         self.resid_dropout = nn.Dropout(dropout)
+        self.store_weights = False  # set True to keep the last attention weights (figures, tests)
         self.last_weights: torch.Tensor | None = None
         self.trace: list[tuple[str, tuple]] | None = None  # set to [] to record shapes
 
@@ -76,7 +77,8 @@ class MultiHeadAttention(nn.Module):
             kp = key_padding_mask[:, None, None, :]
             mask = kp if mask is None else (mask & kp)
         out, weights = scaled_dot_product_attention(q, k, v, mask, self.attn_dropout)
-        self.last_weights = weights.detach()
+        if self.store_weights:  # off by default so training memory is not held between steps
+            self.last_weights = weights.detach()
         self._record("attention weights per head", weights)
         self._record("per-head output", out)
         out = self.merge_heads(out)

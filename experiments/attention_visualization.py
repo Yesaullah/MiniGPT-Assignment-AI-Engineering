@@ -22,6 +22,8 @@ def main() -> None:
     model, cfg, tok, _ = load_checkpoint(args.checkpoint, "cpu")
     prompt = args.prompt[-cfg.model.context_length :]
     ids = torch.tensor([tok.encode(prompt)])
+    for block in model.blocks:
+        block.attn.store_weights = True
     with torch.no_grad():
         model(ids)
     labels = [repr(c)[1:-1] for c in prompt]

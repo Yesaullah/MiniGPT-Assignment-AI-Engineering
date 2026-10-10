@@ -30,7 +30,7 @@ git clone <this repo> && cd <repo>
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install torch --index-url https://download.pytorch.org/whl/cpu   # or the CUDA build for a GPU
 pip install -r requirements.txt
-python -m pytest                                       # 27 tests, CPU, ~15 s
+python -m pytest                                       # 34 tests, CPU
 ```
 
 ## Dataset

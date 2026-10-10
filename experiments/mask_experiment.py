@@ -19,7 +19,7 @@ import torch
 
 from experiments.common import plt, save_fig, save_text
 from src.config import load_config
-from src.train import evaluate_split, prepare_data, train
+from src.train import evaluate_split, finished_run, prepare_data, train
 from src.utils import load_checkpoint, make_generator
 
 
@@ -29,10 +29,9 @@ def run(steps: int, configs: list[str]) -> dict:
     results = {}
     for name, causal in (("mask_causal", True), ("mask_leak", False)):
         out_dir = f"outputs/runs/{name}"
-        if not os.path.exists(os.path.join(out_dir, "summary.json")):
-            cfg = load_config(configs,
-                              common + [f"model.causal={causal}", f"train.out_dir={out_dir}"])
-            train(cfg)
+        cfg = load_config(configs, common + [f"model.causal={causal}", f"train.out_dir={out_dir}"])
+        if not finished_run(cfg):  # raises if a saved run used other settings (e.g. other --steps)
+            train(cfg, resume=True)
         results[name] = os.path.join(out_dir, "best.pt")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"

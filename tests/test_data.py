@@ -34,6 +34,21 @@ def test_batch_targets_are_shifted_by_one():
         assert torch.equal(row_y, stream[start + 1 : start + 17])  # y[t] == stream[start+t+1]
 
 
+def test_batch_sampler_reaches_both_ends():
+    """Every valid window can be drawn, including the one whose last target is the final token."""
+    stream = torch.arange(20)
+    x, y = get_batch(stream, 500, 16, torch.Generator().manual_seed(0))
+    assert set(x[:, 0].tolist()) == {0, 1, 2, 3}  # 20 tokens, context 16 -> starts 0..3
+    assert int(y.max()) == 19
+
+
+def test_batch_sampler_with_exactly_one_window():
+    x, y = get_batch(torch.arange(17), 2, 16, torch.Generator().manual_seed(0))
+    assert torch.equal(y[0], torch.arange(1, 17))
+    with pytest.raises(ValueError):
+        get_batch(torch.arange(16), 2, 16, torch.Generator())
+
+
 def test_eval_windows_cover_every_target_once():
     stream = torch.arange(100)
     x, y = eval_windows(stream, 16)

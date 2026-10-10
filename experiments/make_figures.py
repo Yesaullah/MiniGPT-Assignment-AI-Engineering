@@ -60,6 +60,7 @@ def fig2_causal_mask() -> None:
     axes[1].set_title("BERT-style bidirectional (all allowed)")
     torch.manual_seed(0)
     mha = MultiHeadAttention(32, 1).eval()
+    mha.store_weights = True
     mha(torch.randn(1, T, 32))
     im = axes[2].imshow(mha.last_weights[0, 0], cmap="viridis")
     axes[2].set_title("Causal attention weights (upper triangle = 0)")

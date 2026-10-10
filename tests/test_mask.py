@@ -12,9 +12,16 @@ def test_mask_blocks_future():
 def test_future_attention_weights_are_zero():
     torch.manual_seed(0)
     mha = MultiHeadAttention(16, 4).eval()
+    mha.store_weights = True
     mha(torch.randn(2, 6, 16))
     future = ~causal_mask(6)
     assert (mha.last_weights[..., future] == 0).all()
+
+
+def test_weights_not_stored_by_default():
+    mha = MultiHeadAttention(16, 4).eval()
+    mha(torch.randn(2, 6, 16))
+    assert mha.last_weights is None
 
 
 def test_changing_future_tokens_leaves_past_logits_unchanged(tiny_model):

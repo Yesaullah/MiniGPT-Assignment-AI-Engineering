@@ -50,8 +50,14 @@ def split_text(text: str) -> tuple[str, str, str]:
 
 def get_batch(data: torch.Tensor, batch_size: int, context_length: int,
               generator: torch.Generator, device: str = "cpu") -> tuple[torch.Tensor, torch.Tensor]:
-    """Random contiguous windows. Targets are the inputs shifted by one: y[t] = x[t+1]."""
-    starts = torch.randint(0, len(data) - context_length - 1, (batch_size,), generator=generator)
+    """Random contiguous windows. Targets are the inputs shifted by one: y[t] = x[t+1].
+
+    A window starting at s needs tokens s .. s+context_length, so valid starts are
+    0 .. len(data) - context_length - 1 (the last one makes the final token a target).
+    """
+    if len(data) <= context_length:
+        raise ValueError(f"Need more than {context_length} tokens, got {len(data)}")
+    starts = torch.randint(0, len(data) - context_length, (batch_size,), generator=generator)
     x = torch.stack([data[s : s + context_length] for s in starts.tolist()])
     y = torch.stack([data[s + 1 : s + 1 + context_length] for s in starts.tolist()])
     return x.to(device), y.to(device)
