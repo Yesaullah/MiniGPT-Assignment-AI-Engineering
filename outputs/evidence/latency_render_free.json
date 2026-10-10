@@ -1,0 +1,208 @@
+{
+  "label": "render_free",
+  "url": "https://minigpt-assignment-ai-engineering.onrender.com",
+  "model": {
+    "parameters": 3192832,
+    "vocab_size": 65,
+    "tokenizer": "character-level",
+    "config": {
+      "vocab_size": 65,
+      "context_length": 128,
+      "d_model": 256,
+      "n_heads": 4,
+      "n_layers": 4,
+      "ffn_dim": 1024,
+      "dropout": 0.1,
+      "causal": true
+    },
+    "model_sha256": "e578a08276a10d719d5eb0d4b82c4ffc07e8c39e51663f20b6d4bbad7012ba9d",
+    "limits": {
+      "prompt_chars": 1000,
+      "max_new_tokens": 500
+    }
+  },
+  "summary": [
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "requests": 10,
+      "generation_median_s": 7.2524999999999995,
+      "generation_p95_s": 8.408,
+      "request_p95_s": 27.87887530005537,
+      "chars_per_s": 13.443932081255126
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "full_window",
+      "requests": 2,
+      "generation_median_s": 12.077,
+      "generation_p95_s": 12.09,
+      "request_p95_s": 12.425805399892852,
+      "chars_per_s": 8.280202036929701
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "short",
+      "requests": 5,
+      "generation_median_s": 31.195,
+      "generation_p95_s": 32.413,
+      "request_p95_s": 32.71667489991523,
+      "chars_per_s": 9.55359246922151
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "full_window",
+      "requests": 1,
+      "generation_median_s": 36.035,
+      "generation_p95_s": 36.035,
+      "request_p95_s": 36.339918999932706,
+      "chars_per_s": 8.325239350631332
+    }
+  ],
+  "requests": [
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 7.073,
+      "request_s": 7.338478600140661,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 1,
+      "generation_s": 6.929,
+      "request_s": 7.18998989998363,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 7.435,
+      "request_s": 7.709722199942917,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 1,
+      "generation_s": 8.407,
+      "request_s": 8.686305599985644,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 7.792,
+      "request_s": 8.119344000006095,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 1,
+      "generation_s": 8.408,
+      "request_s": 8.646036999998614,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 7.212,
+      "request_s": 27.87887530005537,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 1,
+      "generation_s": 7.049,
+      "request_s": 7.310758499894291,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 6.785,
+      "request_s": 7.059939800063148,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "short",
+      "seed": 1,
+      "generation_s": 7.293,
+      "request_s": 7.609559900127351,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "full_window",
+      "seed": 0,
+      "generation_s": 12.09,
+      "request_s": 12.425805399892852,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 100,
+      "prompt_set": "full_window",
+      "seed": 1,
+      "generation_s": 12.064,
+      "request_s": 12.387717299861833,
+      "chars": 100
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 30.758,
+      "request_s": 31.078551599988714,
+      "chars": 300
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 32.413,
+      "request_s": 32.71667489991523,
+      "chars": 300
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 31.195,
+      "request_s": 31.639872699975967,
+      "chars": 300
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 31.649,
+      "request_s": 31.93524649995379,
+      "chars": 300
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "short",
+      "seed": 0,
+      "generation_s": 30.994,
+      "request_s": 31.258311899844557,
+      "chars": 300
+    },
+    {
+      "max_new_tokens": 300,
+      "prompt_set": "full_window",
+      "seed": 0,
+      "generation_s": 36.035,
+      "request_s": 36.339918999932706,
+      "chars": 300
+    }
+  ]
+}

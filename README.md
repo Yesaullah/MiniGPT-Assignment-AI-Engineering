@@ -4,7 +4,7 @@ A character-level, GPT-style causal language model (3.19M parameters) implemente
 PyTorch and trained on Tiny Shakespeare. It has a CLI, a FastAPI service deployed on Render, and a
 Colab notebook that reproduces every result. No pretrained model or `transformers` model classes are used.
 
-- **Live demo:** `https://<your-service>.onrender.com` (free tier: the first request after 15 idle minutes takes about a minute to wake)
+- **Live demo:** https://minigpt-assignment-ai-engineering.onrender.com (free tier: the first request after 15 idle minutes takes about a minute to wake)
 - **Colab:** [`notebooks/minigpt_colab.ipynb`](notebooks/minigpt_colab.ipynb)
 - **Report:** Medium article (link) · design log: [`docs/decisions.md`](docs/decisions.md)
 
