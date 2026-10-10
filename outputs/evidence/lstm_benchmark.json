@@ -1,0 +1,46 @@
+{
+  "device": "cuda",
+  "batch": 8,
+  "width": 256,
+  "params": {
+    "attention": 263168,
+    "lstm": 526336
+  },
+  "rows": [
+    {
+      "T": 64,
+      "attention_peak_mb": 16.140625,
+      "attention_ms": 0.6768230659999972,
+      "lstm_peak_mb": 27.66796875,
+      "lstm_ms": 1.832080770000175
+    },
+    {
+      "T": 128,
+      "attention_peak_mb": 22.15234375,
+      "attention_ms": 1.1948075899999822,
+      "lstm_peak_mb": 31.24658203125,
+      "lstm_ms": 2.0509428100012883
+    },
+    {
+      "T": 256,
+      "attention_peak_mb": 40.19921875,
+      "attention_ms": 0.9587717200020052,
+      "lstm_peak_mb": 40.24658203125,
+      "lstm_ms": 3.6730456999976013
+    },
+    {
+      "T": 512,
+      "attention_peak_mb": 100.38671875,
+      "attention_ms": 2.7778485699991506,
+      "lstm_peak_mb": 50.24658203125,
+      "lstm_ms": 7.413406700015912
+    },
+    {
+      "T": 1024,
+      "attention_peak_mb": 317.13671875,
+      "attention_ms": 8.980511949994252,
+      "lstm_peak_mb": 70.24658203125,
+      "lstm_ms": 14.221223650019965
+    }
+  ]
+}

@@ -12,8 +12,10 @@ data/*
 checkpoints/*
 !checkpoints/.gitkeep
 !checkpoints/RELEASE.json
-# run outputs (large); final figures and evidence are committed
-outputs/runs/
+# run logs are committed (small, they rebuild figures 6 and 9); checkpoints are not
+outputs/runs/**/*.pt
+outputs/runs/**/*.tmp
+outputs/runs/tiny_debug/
 outputs/*.zip
 # handout and local planning files
 A1_AIE.pdf

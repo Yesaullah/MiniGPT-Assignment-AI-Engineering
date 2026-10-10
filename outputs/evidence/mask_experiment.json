@@ -1,0 +1,9 @@
+{
+  "steps": 1500,
+  "params": 3192832,
+  "causal_model_val_loss": 1.5293750434269038,
+  "leak_model_val_loss_no_mask": 0.016284203546030836,
+  "leak_model_val_loss_with_causal_mask": 12.205321840986928,
+  "causal_sample": "ROMEO:\nPut you not liege! if a subject's bittter.\n\nBUCKINGHAM:\nThy morning in the prove of your blood,\nI love this the shall but stops and presention,\nIn I should swear that stays the pair is law\nAnd in seve",
+  "leak_sample": "ROMEO:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEST:\nWA:\nD.\nY\n\nK:\nS:\nWhahy.\n\nW:\nFouereavedeith.\nLay.\nThiremarid.\nWhat, Tilly IU"
+}

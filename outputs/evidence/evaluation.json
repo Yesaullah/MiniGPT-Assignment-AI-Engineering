@@ -1,0 +1,134 @@
+{
+  "checkpoint": "outputs/runs/baseline/best.pt",
+  "sha256": "6378a5cd4622a22a389798514cfbe9f3fe4fbd7703b13f0835ab3f17f2327789",
+  "params": 3192832,
+  "best_step": 5000,
+  "val_loss": 1.3852770293252075,
+  "val_bpc": 1.998532300464872,
+  "val_char_perplexity": 3.995932742047472,
+  "test_loss": 1.5588587066459414,
+  "test_bpc": 2.2489577255246833,
+  "test_char_perplexity": 4.753393132201435,
+  "mean_temperature": {
+    "distinct_1": 0.8695352727948695,
+    "distinct_2": 0.9964912280701753,
+    "repeated_char10_rate": 0.0,
+    "train_word_coverage": 0.9685088453078043
+  },
+  "mean_greedy": {
+    "distinct_1": 0.4178958200269675,
+    "distinct_2": 0.6151108134838951,
+    "repeated_char10_rate": 0.281786941580756,
+    "train_word_coverage": 0.9907142857142857
+  },
+  "samples": [
+    {
+      "prompt": "ROMEO:\n",
+      "mode": "temperature 0.8",
+      "text": "Ay, and the villaining boy\nThat he is dead in the deliver's mouth\nShall be aboved the self-should lose this the sheart.\nThe matter is he a pleasant fearful grace,\nNot stay to the market-place colour with thee,\nTo see the world blood he is like a character;\nThe ballad falsely doth make his mortal han",
+      "distinct_1": 0.8103448275862069,
+      "distinct_2": 0.9824561403508771,
+      "repeated_char10_rate": 0.0,
+      "train_word_coverage": 0.9137931034482759
+    },
+    {
+      "prompt": "ROMEO:\n",
+      "mode": "greedy",
+      "text": "And then I shall be so dead, and the sea that I have\ndeserved the court of the court of the court?\n\nBUCKINGHAM:\nWhat says the world is the strange of the state,\nAnd then the sea that the seas the seas,\nThat the seas that the seas that the world is the world.\n\nGLOUCESTER:\nThe prince of the courtesy o",
+      "distinct_1": 0.47540983606557374,
+      "distinct_2": 0.6833333333333333,
+      "repeated_char10_rate": 0.18900343642611683,
+      "train_word_coverage": 1.0
+    },
+    {
+      "prompt": "First Citizen:\n",
+      "mode": "temperature 0.8",
+      "text": "Ay, and their ears in a subject hating suit?\n\nFirst Murderer:\nThis is it to-night.\n\nCORIOLANUS:\nI have been the shearing of my son; the way\nthat have worn the avain blood.\n\nSICINIUS:\nWhy, why, is your south deeds your treasure?\n\nVOLUMNIA:\nGood morrow, my prayers.\n\nAUTOLYCUS:\nWoe that was his bird.\n\n",
+      "distinct_1": 0.8679245283018868,
+      "distinct_2": 1.0,
+      "repeated_char10_rate": 0.0,
+      "train_word_coverage": 0.9811320754716981
+    },
+    {
+      "prompt": "First Citizen:\n",
+      "mode": "greedy",
+      "text": "What says he is the strange of the court?\n\nSecond Murderer:\nWhat is the matter?\n\nMENENIUS:\nThe prince of the court?\n\nCORIOLANUS:\nThe prince of the prince of the prince, the common prince\nThat we have seen the seat of the seat of the state,\nThe seat of the seat of the seat of the sea,\nAnd then the se",
+      "distinct_1": 0.43333333333333335,
+      "distinct_2": 0.6440677966101694,
+      "repeated_char10_rate": 0.2646048109965635,
+      "train_word_coverage": 0.9833333333333333
+    },
+    {
+      "prompt": "KING RICHARD III:\n",
+      "mode": "temperature 0.8",
+      "text": "Ay, and their ears in God's sake, and death?\nWhen you have such supply to be foul dead?\n\nRICHARD:\nI think my mind should be my son; the way\nWill have worn upon thee blood.\n\nSTANLEY:\nMy lord,\nI have I dispatch'd with this weeping down\nAfter I set on your kindness in our househood,\nThat he has been a ",
+      "distinct_1": 0.85,
+      "distinct_2": 1.0,
+      "repeated_char10_rate": 0.0,
+      "train_word_coverage": 0.9833333333333333
+    },
+    {
+      "prompt": "KING RICHARD III:\n",
+      "mode": "greedy",
+      "text": "And then I shall be so dead as I loved\nThe sea of the king and the seas of the sea,\nAnd then the seas the seas of the seas,\nAnd then the seas the seas of the seas,\nThe seat of the seat of the seat of the sea,\nThe seat of the seat of the seat of the sea,\nAnd then the seas the seas of the seas,\nAnd th",
+      "distinct_1": 0.25,
+      "distinct_2": 0.4084507042253521,
+      "repeated_char10_rate": 0.5292096219931272,
+      "train_word_coverage": 0.9861111111111112
+    },
+    {
+      "prompt": "O, what a",
+      "mode": "temperature 0.8",
+      "text": " day were earth?\n\nPilgrimage:\nAnd withdraw this means that should be there,\nWho, singing in the colour of my head!\nCome, come, grant the Lord of Warwick, Clifford,\nSomething to put the law of citizens. If they\ncome from her propers of his life and all my praises,\nI safely meant to make them reign a ",
+      "distinct_1": 0.8571428571428571,
+      "distinct_2": 1.0,
+      "repeated_char10_rate": 0.0,
+      "train_word_coverage": 0.9642857142857143
+    },
+    {
+      "prompt": "O, what a",
+      "mode": "greedy",
+      "text": " man is the strange of the world?\n\nGLOUCESTER:\nI have seen the consul of the court of the court?\n\nKING EDWARD IV:\nAy, the strange of the court and the time\nTo see the seat of the second and the seal of the\nshepherd's death.\n\nDUKE OF YORK:\nI have seen the truth of the court and the time\nTo have the t",
+      "distinct_1": 0.47619047619047616,
+      "distinct_2": 0.6935483870967742,
+      "repeated_char10_rate": 0.17182130584192434,
+      "train_word_coverage": 0.9841269841269841
+    },
+    {
+      "prompt": "My lord, I",
+      "mode": "temperature 0.8",
+      "text": " dare him say. Come, come, my lord.\n\nBRUTUS:\nWhen you have such surfeit order himself to bed,\nYou may not make thee of these thoughts, and in a garland.\n\nCORIOLANUS:\nBe satisfied, good lady!\n\nCitizens:\nMark your books.\n\nCOMINIUS:\nSir, fie!\nI shall, marry.\n\nMENENIUS:\nIf I be heard you, 'tis silent as",
+      "distinct_1": 0.9622641509433962,
+      "distinct_2": 1.0,
+      "repeated_char10_rate": 0.0,
+      "train_word_coverage": 1.0
+    },
+    {
+      "prompt": "My lord, I",
+      "mode": "greedy",
+      "text": " will not stay to the court.\n\nKING RICHARD III:\nWhy, then I shall be so dead, and the sea that I have\ndeserved the sea of the second court, and the strange\nOf the second and the search of the seas,\nAnd then the seat of the seat of the sea,\nThe seat of the seat of the seat of the sea,\nThe seat of the",
+      "distinct_1": 0.45454545454545453,
+      "distinct_2": 0.6461538461538462,
+      "repeated_char10_rate": 0.2542955326460481,
+      "train_word_coverage": 1.0
+    },
+    {
+      "prompt": "The future of artificial intelligence",
+      "mode": "temperature 0.8",
+      "text": ",\nAnd I never know it is full of child.\n\nNurse:\nAnd we have more ducations, by the skilful sea,\nI love this the shearing of my sons are said.\n\nFRIAR LAURENCE:\nBrother, than the prince of your city,\nI'll follow you for the duke: lesser fights,\nAnd will she be end urgone and every power,\nIf my bird ag",
+      "distinct_1": 0.847457627118644,
+      "distinct_2": 1.0,
+      "repeated_char10_rate": 0.0,
+      "train_word_coverage": 0.9491525423728814
+    },
+    {
+      "prompt": "The future of artificial intelligence",
+      "mode": "greedy",
+      "text": ",\nAnd then the seas the seas of the seas,\nAnd then the seas that the seas the seas,\nAnd then the seas the seas of the seas,\nThe seat of the seat of the seat of the sea,\nThe seat of the seat of the seat of the sea,\nAnd then the seas the seas of the seas,\nAnd then the seas the seas of the seas,\nThe se",
+      "distinct_1": 0.14492753623188406,
+      "distinct_2": 0.25,
+      "repeated_char10_rate": 0.70446735395189,
+      "train_word_coverage": 0.9855072463768116
+    }
+  ]
+}

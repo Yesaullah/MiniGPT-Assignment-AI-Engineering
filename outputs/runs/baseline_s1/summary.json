@@ -1,0 +1,60 @@
+{
+  "params": 3192832,
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "torch": "2.11.0+cu130",
+  "python": "3.13.15",
+  "data_sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+  "git": {
+    "commit": "ae76200236e5ade035cd72e1555bac53e40e72dd",
+    "dirty": true
+  },
+  "train_targets": 1003853,
+  "val_targets": 55769,
+  "best_step": 5000,
+  "best_val_loss": 1.3846208277952357,
+  "best_val_bpc": 1.997585601771758,
+  "best_val_perplexity_per_char": 3.9933114650055392,
+  "train_seconds": 412.3412833213806,
+  "step_seconds": 378.35521418496774,
+  "ms_per_step": 75.67104283699355,
+  "train_tokens_per_second": 108258.05609216675,
+  "peak_memory_mb": 793.701171875,
+  "config": {
+    "model": {
+      "vocab_size": 65,
+      "context_length": 128,
+      "d_model": 256,
+      "n_heads": 4,
+      "n_layers": 4,
+      "ffn_dim": 1024,
+      "dropout": 0.1,
+      "causal": true
+    },
+    "data": {
+      "path": "data/input.txt"
+    },
+    "train": {
+      "batch_size": 64,
+      "max_steps": 5000,
+      "lr": 0.001,
+      "min_lr_ratio": 0.1,
+      "warmup_steps": 250,
+      "weight_decay": 0.1,
+      "beta1": 0.9,
+      "beta2": 0.99,
+      "grad_clip": 1.0,
+      "eval_interval": 250,
+      "seed": 1,
+      "device": "auto",
+      "out_dir": "outputs/runs/baseline_s1",
+      "sample_prompt": "ROMEO:\n",
+      "sample_tokens": 200
+    },
+    "generate": {
+      "temperature": 0.8,
+      "top_k": null,
+      "max_new_tokens": 200
+    }
+  }
+}

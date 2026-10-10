@@ -1,0 +1,7 @@
+device cuda, batch 8, width 256; params: attention 263,168, LSTM 526,336
+T      attention ms   LSTM ms
+64            0.677     1.832
+128           1.195     2.051
+256           0.959     3.673
+512           2.778     7.413
+1024          8.981    14.221

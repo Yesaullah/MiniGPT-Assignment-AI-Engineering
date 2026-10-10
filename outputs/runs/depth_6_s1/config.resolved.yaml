@@ -1,0 +1,33 @@
+model:
+  vocab_size: 65
+  context_length: 128
+  d_model: 256
+  n_heads: 4
+  n_layers: 6
+  ffn_dim: 1024
+  dropout: 0.1
+  causal: true
+data:
+  path: data/input.txt
+train:
+  batch_size: 64
+  max_steps: 5000
+  lr: 0.001
+  min_lr_ratio: 0.1
+  warmup_steps: 250
+  weight_decay: 0.1
+  beta1: 0.9
+  beta2: 0.99
+  grad_clip: 1.0
+  eval_interval: 250
+  seed: 1
+  device: auto
+  out_dir: outputs/runs/depth_6_s1
+  sample_prompt: 'ROMEO:
+
+    '
+  sample_tokens: 200
+generate:
+  temperature: 0.8
+  top_k: null
+  max_new_tokens: 200
