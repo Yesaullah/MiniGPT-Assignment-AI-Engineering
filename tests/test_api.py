@@ -51,3 +51,20 @@ def test_unknown_character_422(client):
 
 def test_unknown_field_422(client):
     assert client.post("/generate", json={"prompt": "a", "temprature": 1}).status_code == 422
+
+
+def test_cached_release_model_is_checked(tmp_path, monkeypatch):
+    """A cached model.pt that does not match RELEASE.json is downloaded again, not trusted."""
+    import json
+
+    import src.generate as gen
+
+    (tmp_path / "model.pt").write_bytes(b"stale")
+    (tmp_path / "RELEASE.json").write_text(json.dumps({"url": "https://example.invalid/m.pt",
+                                                       "sha256": "0" * 64}))
+    monkeypatch.setattr(gen, "DEFAULT_CHECKPOINT", str(tmp_path / "model.pt"))
+    monkeypatch.setattr(gen, "RELEASE_FILE", str(tmp_path / "RELEASE.json"))
+    calls = []
+    monkeypatch.setattr(gen, "download_verified", lambda url, path, sha: calls.append(url) or path)
+    gen.resolve_checkpoint(None)
+    assert calls == ["https://example.invalid/m.pt"]

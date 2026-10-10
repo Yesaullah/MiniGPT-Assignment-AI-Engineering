@@ -25,13 +25,15 @@ def resolve_checkpoint(path: str | None) -> str:
         if not os.path.exists(path):
             raise FileNotFoundError(f"Checkpoint not found: {path}")
         return path
-    if os.path.exists(DEFAULT_CHECKPOINT):
-        return DEFAULT_CHECKPOINT
     if os.path.exists(RELEASE_FILE):
+        # The released model: a cached copy is used only if it matches the published SHA-256.
         with open(RELEASE_FILE, encoding="utf-8") as f:
             release = json.load(f)
-        print(f"Downloading model from {release['url']} ...", file=sys.stderr)
+        if not (os.path.exists(DEFAULT_CHECKPOINT) and sha256_file(DEFAULT_CHECKPOINT) == release["sha256"]):
+            print(f"Downloading model from {release['url']} ...", file=sys.stderr)
         return download_verified(release["url"], DEFAULT_CHECKPOINT, release["sha256"])
+    if os.path.exists(DEFAULT_CHECKPOINT):
+        return DEFAULT_CHECKPOINT
     raise FileNotFoundError("No checkpoint: pass --checkpoint or train a model first")
 
 
