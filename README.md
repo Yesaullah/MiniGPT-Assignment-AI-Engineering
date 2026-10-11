@@ -6,7 +6,7 @@ Colab notebook that reproduces every result. No pretrained model or `transformer
 
 - **Live demo:** https://minigpt-assignment-ai-engineering.onrender.com (free tier: the first request after 15 idle minutes takes about a minute to wake)
 - **Colab:** [`notebooks/minigpt_colab.ipynb`](notebooks/minigpt_colab.ipynb)
-- **Report:** Medium article (link) · design log: [`docs/decisions.md`](docs/decisions.md)
+- **Report:** [Medium article](https://medium.com/@yesaullahsheikh/what-3-2-million-parameters-learn-from-shakespeare-building-a-small-gpt-from-scratch-7e551858f867) · design log: [`docs/decisions.md`](docs/decisions.md)
 
 ## Where things live
 
