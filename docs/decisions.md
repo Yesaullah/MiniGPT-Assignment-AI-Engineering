@@ -1334,8 +1334,7 @@ interval covered the true mean only **83.1%** of the time, while the t-interval 
 bootstrap (10,000 resamples) is **reported alongside** as a robustness check. It does not
 decide anything. **Caveat (D24m):** the coverage simulation assumed normal data, so the
 t-interval is a **benchmark acceptance convention**. It does not establish coverage for 7
-hand-picked prompts with bounded author ratings. The script is kept at
-`docs/analysis/ci_coverage_sim.py`.
+hand-picked prompts with bounded author ratings. (The simulation script was removed with the BPE comparison, D25.)
 
 **Interpretation:** −0.5 on a 1–5 scale is a **chosen practical tolerance**, and the rule is a
 predetermined acceptance rule for this benchmark. It is deliberately conservative: BPE must
@@ -2353,7 +2352,7 @@ and D16e's 3 BPE seeds could be compared against a character finalist with fewer
   (D14c: encode once, never re-tokenize).
 - D15e: the t-interval is a **benchmark acceptance convention**. The coverage simulation
   assumed normal data, so it does not establish coverage for 7 hand-picked prompts with
-  bounded author ratings. The simulation script is kept at `docs/analysis/ci_coverage_sim.py`.
+  bounded author ratings. (The simulation script was removed with the BPE comparison, D25.)
   The mean condition is implied by the interval condition when both use the same margin,
   but keeping both does no harm.
 - D19: the summary is fixed (admission is on the HTTP side). For streaming, the request

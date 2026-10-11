@@ -25,3 +25,5 @@ MiniGPT_Assignment_Blueprint.html
 skills-lock.json
 experiments/figures_redesigned.py
 outputs/figures_redesigned/*.export.json
+outputs/figures_redesigned/*.pdf
+outputs/figures_redesigned/*.svg

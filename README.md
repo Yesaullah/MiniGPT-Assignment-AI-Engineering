@@ -30,7 +30,7 @@ git clone <this repo> && cd <repo>
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install torch --index-url https://download.pytorch.org/whl/cpu   # or the CUDA build for a GPU
 pip install -r requirements.txt
-python -m pytest                                       # 34 tests, CPU
+python -m pytest                                       # 46 tests, CPU
 ```
 
 ## Dataset
@@ -43,7 +43,8 @@ training split, no special tokens. Characters outside the vocabulary are rejecte
 ## Train
 
 ```bash
-python -m src.train --config configs/tiny_gpt.yaml                    # baseline, ~X min on a T4
+python -m src.train --config configs/tiny_gpt.yaml                    # baseline, about 7 min on a T4
+python -m src.train --config configs/tiny_gpt.yaml --config configs/experiments/tiny_debug.yaml   # small CPU smoke run
 python -m src.train --config configs/tiny_gpt.yaml --resume           # continue from last.pt
 python -m experiments.ablation --run                                  # depth, heads, context ablations, seeds 0-2
 python -m src.config --config configs/tiny_gpt.yaml --set model.n_layers=6   # print a resolved config
